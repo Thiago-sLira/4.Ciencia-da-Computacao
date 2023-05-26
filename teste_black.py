@@ -22,7 +22,7 @@ mais_comuns = counter.most_common()
 
 elemento_mais_comum, numero_de_vezes = mais_comuns[0]
 
-print(elemento_mais_comum, numero_de_vezes)
+# print(elemento_mais_comum, numero_de_vezes)
 
 thiago = "pessoa estudante de python"
 
@@ -40,3 +40,18 @@ nomes_1 = ["Thiago", "João", "Maria"]
 nomes_2 = ["Pedro", "José", "Ana", ""]
 numeros_1 = [1, 2, 3, 4, 5]
 numeros_2 = [6, 7, 8, 9, 10]
+
+ratings = [6, 8, 5, 9, 10]
+new_ratings = []
+
+for rating in ratings:
+    new_ratings.append(rating * 10)
+
+multiplo_de_tres = [
+    new_ratings for new_ratings in new_ratings if new_ratings % 3 == 0]
+
+# print(multiplo_de_tres)
+
+# def imc(peso, altura):
+#     return peso / altura ** 2
+# (imc(87, 1.92))
