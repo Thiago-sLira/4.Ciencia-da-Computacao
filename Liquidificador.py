@@ -66,24 +66,25 @@ class Liquidificador:
     def cor(self):
         return self.__cor.upper()
 
-    @cor.setter  # Repare que é @cor.setter, e não @property.setter
+    @cor.setter
     def cor(self, nova_cor):
         if nova_cor.lower() == "turquesa":
             raise ValueError("Não existe liquidificador turquesa")
-
         self.__cor = nova_cor
 
     def __init__(self, cor, potencia, tensao, preco):
-        # Observe que usamos o setter para já validarmos o primeiro valor:
-        # usamos self.cor, que chama o setter, e não self.__cor que manipula
-        # o atributo diretamente
         self.cor = cor
+        self.potencia = potencia
+        self.tensao = tensao
+        self.preco = preco
 
-        # Demais variáveis omitidas para este exemplo
+    def __str__(self):
+        return f"liquidificador {self.cor} de {self.potencia}W"
 
 
 liquidificador = Liquidificador("Rosa", "110", "127", "200")
 
-print(liquidificador.cor)  # ROSA
-liquidificador.cor = "Vermelho"
-print(liquidificador.cor)  # VERMELHO
+# print(liquidificador.cor)  # ROSA
+# liquidificador.cor = "Vermelho"
+# print(liquidificador.cor)  # VERMELHO
+# print(liquidificador.preco)
