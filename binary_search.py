@@ -21,7 +21,7 @@ def binary_search(numbers, target):
         else:  # caso contrário, atualiza o índice do inicio
             start = mid + 1
 
-    return -1  # Não encontrou? Retorna -1
+    return -1  # Não encontrou? Retorna -1, terere
 
 
 numbers = [2, 3, 4, 10, 40]
