@@ -20,15 +20,15 @@ class LinkedList:
 
     def insert_last(self, value):
         last_value = Node(value)
-        current_value = self.head_value
+        current_value = self.__get_node_at(len(self) - 1)
 
         # Mais abaixo criaremos o método is_empty()
         # que substituirá a condição deste if
         if current_value is None:
             return self.insert_first(value)
 
-        while current_value.next:
-            current_value = current_value.next
+        # while current_value.next:
+        #     current_value = current_value.next
         current_value.next = last_value
         self.__length += 1
 
@@ -37,10 +37,10 @@ class LinkedList:
             return self.insert_first(value)
         if position >= len(self):
             return self.insert_last(value)
-        current_value = self.head_value
-        while position > 1:
-            current_value = current_value.next  # avança
-            position -= 1  # decrementa
+        current_value = self.__get_node_at(position - 1)
+        # while position > 1:
+        #     current_value = current_value.next  # avança
+        #     position -= 1  # decrementa
         next_value = Node(value)
         next_value.next = current_value.next
         current_value.next = next_value
@@ -58,10 +58,10 @@ class LinkedList:
         if len(self) <= 1:
             return self.remove_first()
 
-        previous_to_be_removed = self.head_value
+        previous_to_be_removed = self.__get_node_at(len(self) - 2)
 
-        while previous_to_be_removed.next.next:
-            previous_to_be_removed = previous_to_be_removed.next
+        # while previous_to_be_removed.next.next:
+        #     previous_to_be_removed = previous_to_be_removed.next
 
         value_to_be_removed = previous_to_be_removed.next
         previous_to_be_removed.next = None
@@ -74,10 +74,10 @@ class LinkedList:
         if position >= len(self):
             return self.remove_last()
 
-        previous_to_be_removed = self.head_value
-        while position > 1:
-            previous_to_be_removed = previous_to_be_removed.next
-            position -= 1
+        previous_to_be_removed = self.__get_node_at(position - 1)
+        # while position > 1:
+        #     previous_to_be_removed = previous_to_be_removed.next
+        #     position -= 1
         value_to_be_removed = previous_to_be_removed.next
         previous_to_be_removed.next = value_to_be_removed.next
         value_to_be_removed.next = None
@@ -86,17 +86,50 @@ class LinkedList:
 
     def get_element_at(self, position):
         value_returned = None
-        value_to_be_returned = self.head_value
+        value_to_be_returned = self.__get_node_at(position)
+        # if value_to_be_returned:
+        # while position > 0 and value_to_be_returned.next:
+        #     value_to_be_returned = value_to_be_returned.next
+        #     position -= 1
         if value_to_be_returned:
-            while position > 0 and value_to_be_returned.next:
-                value_to_be_returned = value_to_be_returned.next
-                position -= 1
-            if value_to_be_returned:
-                value_returned = Node(value_to_be_returned.value)
+            value_returned = Node(value_to_be_returned.value)
         return value_returned
 
     def is_empty(self):
         return not self.__length
+
+    def clear(self):
+        self.head_value = None
+        self.__length = 0
+
+    def __get_node_at(self, position):
+        value_to_be_returned = self.head_value
+
+        if value_to_be_returned:
+            while position > 0 and value_to_be_returned.next:
+                value_to_be_returned = value_to_be_returned.next
+                position -= 1
+        return value_to_be_returned
+
+    def index_of(self, value):
+        position = 1
+        current_value = self.head_value
+        while current_value:
+            if current_value.value == value:
+                return position
+            current_value = current_value.next
+            position += 1
+        return -1
+
+    def delete_duplicates(linked_list):
+        list_with_unique_elements = LinkedList()
+
+        while linked_list:
+            current_node = linked_list.remove_first()
+            if list_with_unique_elements.index_of(current_node.value) == -1:
+                list_with_unique_elements.insert_last(current_node.value)
+
+        return list_with_unique_elements
 
 
 if __name__ == "__main__":
