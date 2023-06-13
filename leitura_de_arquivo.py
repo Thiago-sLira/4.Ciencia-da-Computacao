@@ -4,6 +4,9 @@ with open("arquivo.txt", "w") as file:
     file.writelines(LINES)
 
 # leitura
-with open("arquivo.txt", "r") as file:
-    for line in file:
-        print(line)
+try:
+    with open("arquivo.txt", "r") as file:
+        # for line in file:
+        print(file.read().splitlines())
+except FileNotFoundError:
+    print("Arquivo não encontrado")
