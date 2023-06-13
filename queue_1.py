@@ -20,6 +20,14 @@ class Queue:
 
         return "Queue(" + str_items + ")"
 
+    def __len__(self):
+        return len(self._data)
+
+    def search(self, index):
+        if index < 0 or index >= len(self._data):
+            raise IndexError("Índice Inválido ou Inexiste")
+        return self._data[index]
+
 
 if __name__ == "__main__":
     elements = ["Milkshake", "Batata Frita", "Refrigerante"]
@@ -34,11 +42,12 @@ if __name__ == "__main__":
     print(content_queue)
     # Saída: Queue(Milkshake, Batata Frita, Refrigerante)
 
-    content_queue.dequeue()
-    print(content_queue)
-    # Saída: Queue(Batata Frita, Refrigerante)
+    print(content_queue.search(5))
+    # content_queue.dequeue()
+    # print(content_queue)
+    # # Saída: Queue(Batata Frita, Refrigerante)
 
-    print(content_queue.dequeue())
+    # print(content_queue.dequeue())
     # Saída: Batata Frita
     # porque "Milkshake" já foi removido e "Batata Frita" se tornou o primeiro
     # elemento da fila
