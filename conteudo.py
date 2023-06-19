@@ -40,6 +40,29 @@ class Conjunto:
                 new_set.add(i)
         return new_set
 
+    def difference(self, conjunto_b):
+        new_conjunto = Conjunto()
+
+        for index in range(1001):
+            if self.set[index] and not conjunto_b.set[index]:
+                new_conjunto.add(index)
+
+        return new_conjunto
+
+    def issubset(self, conjunto_b):
+        for index in range(1001):
+            if self.set[index] and not conjunto_b.set[index]:
+                return False
+
+        return True
+
+    def issuperset(self, conjunto_b):
+        for index in range(1001):
+            if conjunto_b.set[index] and not self.set[index]:
+                return False
+
+        return True
+
 
 if __name__ == "__main__":
     # conj = Conjunto()
